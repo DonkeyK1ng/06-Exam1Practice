@@ -2,8 +2,8 @@
 PRACTICE Exam 1, problem 2.
 
 Authors: David Mutchler, Vibha Alangar, Valerie Galluzzi, Mark Hays,
-         Amanda Stouder, their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         Amanda Stouder, their colleagues and Yuanning Zuo.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -101,8 +101,25 @@ def problem2a(circle, rectangle, window):
       :type rectangle: rg.Rectangle
       :type window:    rg.RoseWindow
     """
+
+    x = rectangle._upper_right_corner.x
+    y = rectangle._upper_right_corner.y
+    z = rectangle._lower_left_corner.x
+    c = rectangle._lower_left_corner.y
+    new_line = rg.Line(rg.Point(x, y), rg.Point(z, c))
+    new_line.arrow = 'last'
+    new_line.attach_to(window)
+    circle.attach_to(window)
+
+    rectangle.attach_to(window)
+    window.render()
+    window.continue_on_mouse_click()
+    circle.fill_color=rectangle.outline_color
+    window.render()
+    window.continue_on_mouse_click()
+
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # Done: 2. Implement and test this function.
     #          Tests have been written for you (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
@@ -172,8 +189,26 @@ def problem2b(rect, n, delta, win):
       :type delta:  int
       :type win:    rg.RoseWindow
     """
+    for k in range(n):
+        """rect.attach_to(win)
+        x=rect.get_lower_right_corner().x
+        y=rect.get_upper_right_corner().y
+        z=rect.get_lower_left_corner().x
+        c=rect.get_upper_left_corner().y
+        new_rectangle=rg.Rectangle(rg.Point(x,y),rg.Point(z,c))
+        print(new_rectangle)
+        new_rectangle.attach_to(win)
+    win.render()"""
+        rect.attach_to(win)
+        ul=rect.get_upper_left_corner()
+        br=rect.get_lower_right_corner()
+        new_rect=rg.Rectangle(rg.Point(ul.x-delta*(k+1),ul.y-delta*(k+1)),rg.Point(br.x+delta*(k+1),br.y+delta*(k+1)))
+        new_rect.attach_to(win)
+        win.render()
+
+
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # Done: 3. Implement and test this function.
     #          Tests have been written for you (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
